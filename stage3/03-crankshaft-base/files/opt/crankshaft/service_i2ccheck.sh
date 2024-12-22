@@ -52,7 +52,7 @@ if [ "$(i2cdetect -l | grep i2c-1)" != "" ]; then
     log_echo "I2C bus enabled."
 
     # check for rtc in config.txt
-    RTC=$(cat /boot/config.txt | grep dtoverlay=i2c-rtc | tail -n1)
+    RTC=$(cat /boot/firmware/config.txt | grep dtoverlay=i2c-rtc | tail -n1)
 
     if [ "$RTC" != "" ]; then
         checkdevice 68

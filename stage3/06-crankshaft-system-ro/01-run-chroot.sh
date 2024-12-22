@@ -31,7 +31,7 @@ echo "ramfs		/tmp/.cache-root	ramfs			size=16m,nodev,nosuid,noatime,nodiratime		
 echo "ramfs		/media/MYMEDIA		ramfs			size=16m,nodev,nosuid,noatime,nodiratime		0	0" >> /etc/fstab
 echo "ramfs		/media/USBDRIVES	ramfs			size=16m,nodev,nosuid,noatime,nodiratime		0	0" >> /etc/fstab
 
-sed -i 's/root=ROOTDEV/root=\/dev\/mmcblk0p2 ro/' /boot/cmdline.txt
+sed -i 's/root=ROOTDEV/root=\/dev\/mmcblk0p2 ro/' /boot/firmware/cmdline.txt
 sed -i "s/#Storage=auto/Storage=volatile/" /etc/systemd/journald.conf
 
 # Link dirs for read only

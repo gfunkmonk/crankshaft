@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # /boot
-install -m 644 files/boot/config.txt                                    "${ROOTFS_DIR}/boot/"
+install -m 644 files/boot/firmware/config.txt                                    "${ROOTFS_DIR}/boot/firmware"
 install -d "${ROOTFS_DIR}/boot/crankshaft"
 install -m 644 files/boot/crankshaft/gpio2kbd.cfg                       "${ROOTFS_DIR}/boot/crankshaft/"
 install -m 644 files/boot/crankshaft/openauto.ini                       "${ROOTFS_DIR}/boot/crankshaft/"
@@ -178,6 +178,3 @@ install -m 644 files/lib/systemd/system/dhcpcd.service                  "${ROOTF
 
 #qt5
 tar -xf files/qt5/Qt5_OpenGLES2.tar.xz -C ${ROOTFS_DIR}/
-
-#wiringpi
-install -m 755 files/wiringpi-latest.deb                               "${ROOTFS_DIR}/root/"

@@ -1,0 +1,33 @@
+libprotobuf32
+libboost-log1.74 libboost-test1.74 libboost-thread1.74 libboost-date-time1.74 libboost-chrono1.74 libboost-atomic1.74
+libpulse-mainloop-glib0 pulseaudio
+libfontconfig1
+libinput10
+libxkbcommon0
+librtaudio6
+fbi
+libts0
+insserv
+watchdog
+evtest
+mpg321
+gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa gstreamer1.0-libav
+vulkan-tools mesa-vulkan-drivers
+gldriver-test
+libjpeg9
+libtag1v5
+libgps28
+dos2unix
+triggerhappy
+locate
+eyed3
+plymouth
+cpufrequtils
+libgl1-mesa-dri libgles1 libgles2-mesa
+libdouble-conversion3
+gpsd
+ntp
+hostapd
+dnsmasq
+i2c-tools
+python3-pip

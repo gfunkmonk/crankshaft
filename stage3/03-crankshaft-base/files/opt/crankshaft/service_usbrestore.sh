@@ -114,12 +114,12 @@ if [ ! -f /etc/cs_backup_restore_done ]; then
             chmod 640 /etc/shadow > /dev/null 2>&1
             chown root:shadow /etc/shadow > /dev/null 2>&1
             # remove possible existing lost boot entries
-            sed -i 's/# Initramfs params for flashsystem//' /boot/config.txt
-            sed -i 's/initramfs initrd.img followkernel//' /boot/config.txt
-            sed -i 's/ramfsfile=initrd.img//' /boot/config.txt
-            sed -i 's/ramfsaddr=-1//' /boot/config.txt
+            sed -i 's/# Initramfs params for flashsystem//' /boot/firmware/config.txt
+            sed -i 's/initramfs initrd.img followkernel//' /boot/firmware/config.txt
+            sed -i 's/ramfsfile=initrd.img//' /boot/firmware/config.txt
+            sed -i 's/ramfsaddr=-1//' /boot/firmware/config.txt
             # clean empty lines
-            sed -i '/./,/^$/!d' /boot/config.txt
+            sed -i '/./,/^$/!d' /boot/firmware/config.txt
             # updating crankshaft-env.sh with possible new entries
             echo "" > /dev/tty3
             echo "[${CYAN}${BOLD} INFO ${RESET}] *******************************************************" > /dev/tty3
@@ -138,8 +138,8 @@ if [ ! -f /etc/cs_backup_restore_done ]; then
             # reload settings after restore
             source /boot/crankshaft/crankshaft_env.sh
             # check rtc setup
-            RTC_CHECK=$(cat /boot/config.txt | grep "^dtoverlay=i2c-rtc")
-            RTC_MODEL=$(cat /boot/config.txt | grep "^dtoverlay=i2c-rtc" | cut -d, -f2)
+            RTC_CHECK=$(cat /boot/firmware/config.txt | grep "^dtoverlay=i2c-rtc")
+            RTC_MODEL=$(cat /boot/firmware/config.txt | grep "^dtoverlay=i2c-rtc" | cut -d, -f2)
             if [ ! -z $RTC_CHECK ]; then
                 echo "" > /dev/tty3
                 echo "[${CYAN}${BOLD} INFO ${RESET}] *******************************************************" > /dev/tty3
@@ -164,7 +164,7 @@ if [ ! -f /etc/cs_backup_restore_done ]; then
                 systemctl daemon-reload > /dev/null 2>&1
             fi
             # check camera setup
-            CAM_CHECK=$(cat /boot/config.txt | grep "^start_x=1" | tail -n1)
+            CAM_CHECK=$(cat /boot/firmware/config.txt | grep "^start_x=1" | tail -n1)
             if [ ! -z $CAM_CHECK ]; then
                 echo "" > /dev/tty3
                 echo "[${CYAN}${BOLD} INFO ${RESET}] *******************************************************" > /dev/tty3
@@ -180,37 +180,37 @@ if [ ! -f /etc/cs_backup_restore_done ]; then
             echo "[${CYAN}${BOLD} INFO ${RESET}] Setup default config.txt params..." > /dev/tty3
             echo "[${CYAN}${BOLD} INFO ${RESET}] *******************************************************" > /dev/tty3
             # remove possible existing lost boot entries
-            sed -i 's/# Overscan fix.*//' /boot/config.txt
-            sed -i 's/overscan_scale=.*//' /boot/config.txt
-            sed -i 's/# Disable Rainbow splash.*//' /boot/config.txt
-            sed -i 's/disable_splash=.*//' /boot/config.txt
-            sed -i 's/# Disable the PWR LED.*//' /boot/config.txt
-            sed -i 's/dtparam=pwr_led_trigger.*//' /boot/config.txt
-            sed -i 's/dtparam=pwr_led_activelow=.*//' /boot/config.txt
-            sed -i 's/# GPU Mem.*//' /boot/config.txt
-            sed -i 's/gpu_mem=.*//' /boot/config.txt
+            sed -i 's/# Overscan fix.*//' /boot/firmware/config.txt
+            sed -i 's/overscan_scale=.*//' /boot/firmware/config.txt
+            sed -i 's/# Disable Rainbow splash.*//' /boot/firmware/config.txt
+            sed -i 's/disable_splash=.*//' /boot/firmware/config.txt
+            sed -i 's/# Disable the PWR LED.*//' /boot/firmware/config.txt
+            sed -i 's/dtparam=pwr_led_trigger.*//' /boot/firmware/config.txt
+            sed -i 's/dtparam=pwr_led_activelow=.*//' /boot/firmware/config.txt
+            sed -i 's/# GPU Mem.*//' /boot/firmware/config.txt
+            sed -i 's/gpu_mem=.*//' /boot/firmware/config.txt
 
             # clean empty lines
-            sed -i '/./,/^$/!d' /boot/config.txt
-            sed -i '/./,/^$/!d' /boot/config.txt
-            echo "" >> /boot/config.txt
+            sed -i '/./,/^$/!d' /boot/firmware/config.txt
+            sed -i '/./,/^$/!d' /boot/firmware/config.txt
+            echo "" >> /boot/firmware/config.txt
             # Crankshaft Base params
-            echo "# Overscan fix" >> /boot/config.txt
-            echo "overscan_scale=1" >> /boot/config.txt
-            echo "" >> /boot/config.txt
-            echo "# Disable Rainbow splash" >> /boot/config.txt
-            echo "disable_splash=1" >> /boot/config.txt
-            echo "" >> /boot/config.txt
-            echo "# Disable the PWR LED." >> /boot/config.txt
-            echo "dtparam=pwr_led_trigger=none" >> /boot/config.txt
-            echo "dtparam=pwr_led_activelow=off" >> /boot/config.txt
-            echo "" >> /boot/config.txt
-            echo "# GPU Mem" >> /boot/config.txt
-            echo "gpu_mem=256" >> /boot/config.txt
+            echo "# Overscan fix" >> /boot/firmware/config.txt
+            echo "overscan_scale=1" >> /boot/firmware/config.txt
+            echo "" >> /boot/firmware/config.txt
+            echo "# Disable Rainbow splash" >> /boot/firmware/config.txt
+            echo "disable_splash=1" >> /boot/firmware/config.txt
+            echo "" >> /boot/firmware/config.txt
+            echo "# Disable the PWR LED." >> /boot/firmware/config.txt
+            echo "dtparam=pwr_led_trigger=none" >> /boot/firmware/config.txt
+            echo "dtparam=pwr_led_activelow=off" >> /boot/firmware/config.txt
+            echo "" >> /boot/firmware/config.txt
+            echo "# GPU Mem" >> /boot/firmware/config.txt
+            echo "gpu_mem=256" >> /boot/firmware/config.txt
 
             # restore bluetooth
             if [ ${ENABLE_BLUETOOTH} -eq 1 ]; then
-                BT_CHECK=$(cat /boot/config.txt | grep '^dtoverlay=pi3-disable-bt' | tail -n1)
+                BT_CHECK=$(cat /boot/firmware/config.txt | grep '^dtoverlay=pi3-disable-bt' | tail -n1)
                 if [ -z $BT_CHECK ]; then
                     BTTYPE="builtin"
                 else
