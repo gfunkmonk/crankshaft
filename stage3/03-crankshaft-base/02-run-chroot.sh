@@ -13,39 +13,39 @@ dpkg-reconfigure --frontend=noninteractive locales
 update-locale LANG=$SETLANG.UTF-8
 
 # we don't need to resize the root part
-sed -i 's/ init\=.*$//' /boot/cmdline.txt
+sed -i 's/ init\=.*$//' /boot/firmware/cmdline.txt
 
 # config.txt
-echo "" >> /boot/config.txt
-echo "# Custom power settings" >> /boot/config.txt
-echo "max_usb_current=1" >> /boot/config.txt
+echo "" >> /boot/firmware/config.txt
+echo "# Custom power settings" >> /boot/firmware/config.txt
+echo "max_usb_current=1" >> /boot/firmware/config.txt
 
-echo "" >> /boot/config.txt
-echo "# Disable the PWR LED." >> /boot/config.txt
-echo "dtparam=pwr_led_trigger=none" >> /boot/config.txt
-echo "dtparam=pwr_led_activelow=off" >> /boot/config.txt
+echo "" >> /boot/firmware/config.txt
+echo "# Disable the PWR LED." >> /boot/firmware/config.txt
+echo "dtparam=pwr_led_trigger=none" >> /boot/firmware/config.txt
+echo "dtparam=pwr_led_activelow=off" >> /boot/firmware/config.txt
 
-echo "" >> /boot/config.txt
-echo "# Disable Rainbow splash" >> /boot/config.txt
-echo "disable_splash=1" >> /boot/config.txt
+echo "" >> /boot/firmware/config.txt
+echo "# Disable Rainbow splash" >> /boot/firmware/config.txt
+echo "disable_splash=1" >> /boot/firmware/config.txt
 
-echo "" >> /boot/config.txt
-echo "# Overscan fix" >> /boot/config.txt
-echo "overscan_scale=1" >> /boot/config.txt
+echo "" >> /boot/firmware/config.txt
+echo "# Overscan fix" >> /boot/firmware/config.txt
+echo "overscan_scale=1" >> /boot/firmware/config.txt
 
-echo "" >> /boot/config.txt
-echo "# Enable watchdog" >> /boot/config.txt
-echo "dtparam=watchdog=on" >> /boot/config.txt
+echo "" >> /boot/firmware/config.txt
+echo "# Enable watchdog" >> /boot/firmware/config.txt
+echo "dtparam=watchdog=on" >> /boot/firmware/config.txt
 
-echo "" >> /boot/config.txt
-echo "# Boot time improvements" >> /boot/config.txt
-echo "boot_delay=0" >> /boot/config.txt
-echo "initial_turbo=30" >> /boot/config.txt
-echo "start_cd=1" >> /boot/config.txt
-echo "#dtoverlay=sdtweak,overclock_50=100" >> /boot/config.txt
+echo "" >> /boot/firmware/config.txt
+echo "# Boot time improvements" >> /boot/firmware/config.txt
+echo "boot_delay=0" >> /boot/firmware/config.txt
+echo "initial_turbo=30" >> /boot/firmware/config.txt
+echo "start_cd=1" >> /boot/firmware/config.txt
+echo "#dtoverlay=sdtweak,overclock_50=100" >> /boot/firmware/config.txt
 
 # enable vc4 for rpi3 as well
-#sed -i 's/#dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-fkms-v3d/' /boot/config.txt
+#sed -i 's/#dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-fkms-v3d/' /boot/firmware/config.txt
 
 # pulseaudio
 cat /etc/pulse/csng_daemon.conf >> /etc/pulse/daemon.conf
@@ -176,11 +176,11 @@ systemctl enable getty@tty3.service
 sed -i 's/^TTYVHangup=.*/TTYVHangup=no/' /lib/systemd/system/getty@.service
 
 # enable splash and set default console
-sed -i 's/console=tty1/console=tty3/' /boot/cmdline.txt
-sed -i 's/console=serial0,115200 //' /boot/cmdline.txt
+sed -i 's/console=tty1/console=tty3/' /boot/firmware/cmdline.txt
+sed -i 's/console=serial0,115200 //' /boot/firmware/cmdline.txt
 
 # add special settings
-sed -i 's/$/ logo.nologo loglevel=0 vt.global_cursor_default=0 noswap splash plymouth.ignore-serial-consoles consoleblank=0 ipv6.disable=1/' /boot/cmdline.txt
+sed -i 's/$/ logo.nologo loglevel=0 vt.global_cursor_default=0 noswap splash plymouth.ignore-serial-consoles consoleblank=0 ipv6.disable=1/' /boot/firmware/cmdline.txt
 
 # Banner for ssh
 sed -i 's/#Banner none/Banner \/etc\/issue.net/' /etc/ssh/sshd_config
@@ -269,9 +269,6 @@ sed -i 's/^MountFlags=.*/MountFlags=shared/' /lib/systemd/system/systemd-udevd.s
 
 # link csmt
 ln -s /usr/local/bin/crankshaft /usr/local/bin/csmt
-
-# Set path for rsyslogd
-sed -i 's/\$WorkDirectory \/var\/spool\/rsyslog/\$WorkDirectory \/var\/spool/' /etc/rsyslog.conf
 
 # Download source for exfat-nofuse and kernel
 cd /usr/src/

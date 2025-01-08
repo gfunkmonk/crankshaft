@@ -97,6 +97,7 @@ for FSMOUNTPOINT in $(ls -d /media/USBDRIVES/* 2>/dev/null); do
             cp -f /tmp/bootfs/crankshaft/capvolume /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
             cp -f /tmp/bootfs/crankshaft/alsactl.state /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
             cp -f /tmp/bootfs/crankshaft/openauto.ini /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
+            cp -f /tmp/bootfs/crankshaft/openauto-logs.ini /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
             cp -f /tmp/bootfs/crankshaft/wallpaper.png /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
             cp -f /tmp/bootfs/crankshaft/wallpaper-night.png /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
             cp -f /tmp/bootfs/crankshaft/wallpaper-classic.png /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/crankshaft/ 2>/dev/null
@@ -205,7 +206,7 @@ for FSMOUNTPOINT in $(ls -d /media/USBDRIVES/* 2>/dev/null); do
                 sync
                 mount -o rw /dev/mmcblk0p1 /tmp/bootfs
                 mount -o rw /dev/mmcblk0p2 /tmp/rootfs
-                cp -f  /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/config.txt /tmp/bootfs/ 2>/dev/null
+                cp -f  /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/boot/firmware/config.txt /tmp/bootfs/ 2>/dev/null
                 cp -f  /media/USBDRIVES/${PARTITION}/cs-backup/${SERIAL}/etc/modules /tmp/rootfs/etc/ 2>/dev/null
                 chmod 644 /tmp/rootfs/etc/modules 2>/dev/null
                 umount /tmp/bootfs

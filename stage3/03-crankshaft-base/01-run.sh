@@ -1,10 +1,11 @@
 #!/bin/bash -e
 
 # /boot
-install -m 644 files/boot/config.txt                                    "${ROOTFS_DIR}/boot/"
+install -m 644 files/boot/firmware/config.txt                                    "${ROOTFS_DIR}/boot/firmware"
 install -d "${ROOTFS_DIR}/boot/crankshaft"
 install -m 644 files/boot/crankshaft/gpio2kbd.cfg                       "${ROOTFS_DIR}/boot/crankshaft/"
 install -m 644 files/boot/crankshaft/openauto.ini                       "${ROOTFS_DIR}/boot/crankshaft/"
+install -m 644 files/boot/crankshaft/openauto-logs.ini                  "${ROOTFS_DIR}/boot/crankshaft/"
 install -m 644 files/boot/crankshaft/startup.py                         "${ROOTFS_DIR}/boot/crankshaft/"
 install -m 644 files/boot/crankshaft/startup.sh                         "${ROOTFS_DIR}/boot/crankshaft/"
 install -m 644 files/boot/crankshaft/triggerhappy.conf                  "${ROOTFS_DIR}/boot/crankshaft/"
@@ -61,7 +62,6 @@ install -m 755 files/etc/rc.local                                       "${ROOTF
 install -m 644 files/etc/issue                                          "${ROOTFS_DIR}/etc/"
 install -m 644 files/etc/issue.net                                      "${ROOTFS_DIR}/etc/"
 install -m 644 files/etc/motd                                           "${ROOTFS_DIR}/etc/"
-install -m 644 files/etc/rsyslog.d/disable-logspam.conf                 "${ROOTFS_DIR}/etc/rsyslog.d/"
 
 install -d "${ROOTFS_DIR}/etc/initramfs-tools/conf.d"
 install -d "${ROOTFS_DIR}/etc/initramfs-tools/hooks"
@@ -169,14 +169,5 @@ install -m 644 files/usr/share/plymouth/themes/custom/shutdown.png          "${R
 # /lib
 install -m 755 files/lib/udev/hwclock-set                               "${ROOTFS_DIR}/lib/udev/"
 
-# custom resolv.conf hook
-install -m 644 files/lib/dhcpcd/dhcpcd-hooks/20-resolv.conf             "${ROOTFS_DIR}/lib/dhcpcd/dhcpcd-hooks/"
-
-# custom dhcpcd service withh added pre wifisetup
-install -m 644 files/lib/systemd/system/dhcpcd.service                  "${ROOTFS_DIR}/lib/systemd/system/"
-
 #qt5
 tar -xf files/qt5/Qt5_OpenGLES2.tar.xz -C ${ROOTFS_DIR}/
-
-#wiringpi
-install -m 755 files/wiringpi-latest.deb                               "${ROOTFS_DIR}/root/"

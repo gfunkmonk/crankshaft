@@ -8,7 +8,7 @@ if [ -f $BRIGHTNESS_FILE ]; then
 fi
 
 # Check if we need to rotate
-flipset=`grep '^lcd_rotate=' /boot/config.txt`
+flipset=`grep '^lcd_rotate=' /boot/firmware/config.txt`
 
 # check gpio pin if activated
 if [ $ENABLE_GPIO -eq 1 ] && [ $INVERT_PIN -ne 0 ]; then
@@ -27,12 +27,12 @@ if [ $FLIP_SCREEN -ne 0 ] || [ $INVERT_MODE_GPIO -ne 1 ] ; then
         echo "[${RED}${BOLD} INFO ${RESET}] *******************************************************" >/dev/tty3
         echo "[${RED}${BOLD} INFO ${RESET}] Display rotation triggered - Setting up..." >/dev/tty3
         echo "[${RED}${BOLD} INFO ${RESET}] *******************************************************" >/dev/tty3
-        sed -i 's/^# Display rotation.*//' /boot/config.txt
-        sed -i 's/^lcd_rotate=.*//' /boot/config.txt
-        sed -i '/./,/^$/!d' /boot/config.txt
-        sh -c "echo '' >> /boot/config.txt"
-        sh -c "echo '# Display rotation' >> /boot/config.txt"
-        sh -c "echo 'lcd_rotate=2' >> /boot/config.txt"
+        sed -i 's/^# Display rotation.*//' /boot/firmware/config.txt
+        sed -i 's/^lcd_rotate=.*//' /boot/firmware/config.txt
+        sed -i '/./,/^$/!d' /boot/firmware/config.txt
+        sh -c "echo '' >> /boot/firmware/config.txt"
+        sh -c "echo '# Display rotation' >> /boot/firmware/config.txt"
+        sh -c "echo 'lcd_rotate=2' >> /boot/firmware/config.txt"
         sync
         echo "[${CYAN}${BOLD} INFO ${RESET}] *******************************************************" >/dev/tty3
         echo "[${CYAN}${BOLD} INFO ${RESET}] Display rotation activated" >/dev/tty3
@@ -50,9 +50,9 @@ else
         echo "[${RED}${BOLD} INFO ${RESET}] *******************************************************" >/dev/tty3
         echo "[${RED}${BOLD} INFO ${RESET}] Display rotation not triggered - Removing..." >/dev/tty3
         echo "[${RED}${BOLD} INFO ${RESET}] *******************************************************" >/dev/tty3
-        sed -i 's/^# Display rotation.*//' /boot/config.txt
-        sed -i 's/^lcd_rotate=.*//' /boot/config.txt
-        sed -i '/./,/^$/!d' /boot/config.txt
+        sed -i 's/^# Display rotation.*//' /boot/firmware/config.txt
+        sed -i 's/^lcd_rotate=.*//' /boot/firmware/config.txt
+        sed -i '/./,/^$/!d' /boot/firmware/config.txt
         sync
         echo "[${CYAN}${BOLD} INFO ${RESET}] *******************************************************" >/dev/tty3
         echo "[${CYAN}${BOLD} INFO ${RESET}] Display rotation removed" >/dev/tty3
