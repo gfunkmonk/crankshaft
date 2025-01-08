@@ -270,9 +270,6 @@ sed -i 's/^MountFlags=.*/MountFlags=shared/' /lib/systemd/system/systemd-udevd.s
 # link csmt
 ln -s /usr/local/bin/crankshaft /usr/local/bin/csmt
 
-# Set path for rsyslogd
-sed -i 's/\$WorkDirectory \/var\/spool\/rsyslog/\$WorkDirectory \/var\/spool/' /etc/rsyslog.conf
-
 # Download source for exfat-nofuse and kernel
 cd /usr/src/
 git clone https://github.com/dorimanx/exfat-nofuse
